@@ -20,6 +20,9 @@ public class LoginSession {
     @Column(nullable = false)
     private String sessionToken;
 
+    @Column(name = "created_at", nullable = false)
+    private java.time.Instant createdAt = java.time.Instant.now();
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -30,6 +33,15 @@ public class LoginSession {
     public LoginSession(String sessionToken, User user) {
         this.sessionToken = sessionToken;
         this.user = user;
+        this.createdAt = java.time.Instant.now();
+    }
+
+    public java.time.Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(java.time.Instant createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
